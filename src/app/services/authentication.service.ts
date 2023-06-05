@@ -25,13 +25,12 @@ export class AuthenticationService {
   }
 
   login(username: string, password: string) {
-    // post to fake back end, this url will be handled there...
-
+  
     return this.http
       .post<any>(`/users/authenticate`, { username, password })
       .pipe(
         map((user) => {
-          // store user details and basic auth credentials in local storage to keep user logged in between page refreshes
+          // storing user details and basic auth credentials in local storage to keep user logged in between page refreshes
           user.authdata = window.btoa(username + ':' + password);
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.currentUserSubject.next(user);
@@ -41,7 +40,7 @@ export class AuthenticationService {
   }
 
   logout() {
-    // remove user from local storage to log user out
+    // removing user from local storage to log user out
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
   }

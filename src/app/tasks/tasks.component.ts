@@ -9,7 +9,6 @@ import {
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
-  styleUrls: ['./tasks.component.scss'],
 })
 export class TasksComponent {
   public gridApi: any;
@@ -27,6 +26,7 @@ export class TasksComponent {
   public userId = null;
   public count = null;
   public lastId = 1;
+  public isLoading=true;
   constructor(
     private empService: EmployeeService,
     private route: ActivatedRoute,
@@ -71,6 +71,7 @@ export class TasksComponent {
     this.empService
       .getTasksList(userId ? userId : '')
       .subscribe((data: any) => {
+        this.isLoading=false
         this.rowData = data;
         this.count = this.rowData.length;
         this.lastId = this.rowData[this.rowData.length - 1].id;
@@ -80,7 +81,7 @@ export class TasksComponent {
   onGridReady(params: any) {
     this.gridApi = params.api;
 
-    if (!this.rowData) {
+    if (this.isLoading) {
       this.gridApi.showLoadingOverlay();
     }
     this.gridApi.sizeColumnsToFit();

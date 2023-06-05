@@ -21,11 +21,11 @@
     </button>
   </div>
 </div>
-<div class="row mt-3">
+<div class="row">
   <div class="col-md-12">
     <ag-grid-angular
       #agGrid
-      style="height: 500px"
+      style="height: 400px"
       id="myGrid"
       class="ag-theme-alpine"
       [columnDefs]="columnDefs"
@@ -40,54 +40,55 @@
   </div>
 </div>
 <div class="row border-0" *ngIf="showPagination">
-  <div class="col-md-6 pt-4 px-3">
-    <strong *ngIf="rowData.length > 0">
-      Showing {{ (page - 1) * pageSize + 1 }}-{{
-        page * pageSize < rowData.length ? page * pageSize : rowData.length
-      }}
-      of {{ rowData.length }} entries
-    </strong>
-  </div>
-
-  <div class="col-md-6">
-    <div class="float-right pt-3 px-3">
-      <ngb-pagination
-        class="rounded"
-        [page]="page"
-        [pageSize]="pageSize"
-        [collectionSize]="rowData.length"
-        [maxSize]="2"
-        [boundaryLinks]="false"
-        [directionLinks]="rowData.length > 10"
-        (pageChange)="onPageChange($event)"
-      >
-        <ng-template ngbPaginationFirst>First</ng-template>
-        <ng-template ngbPaginationLast>Last</ng-template>
-        <ng-template ngbPaginationPrevious
-          ><span class="p-2">Previous</span></ng-template
+  <div class="d-flex align-items-center pt-0">
+    <div class="p-2 pr-3 pl-0">
+      <strong *ngIf="rowData.length > 0">
+        Showing {{ (page - 1) * pageSize + 1 }}-{{
+          page * pageSize < rowData.length ? page * pageSize : rowData.length
+        }}
+        of {{ rowData.length }} entries
+      </strong>
+    </div>
+    <div class="p-2">
+      <div class="float-right pt-3 px-3">
+        <ngb-pagination
+          class="rounded"
+          [page]="page"
+          [pageSize]="pageSize"
+          [collectionSize]="rowData.length"
+          [maxSize]="2"
+          [boundaryLinks]="false"
+          [directionLinks]="rowData.length > 10"
+          (pageChange)="onPageChange($event)"
         >
-        <ng-template ngbPaginationNext
-          ><span class="p-2">Next</span></ng-template
-        >
-        <ng-template ngbPaginationEllipsis>...</ng-template>
-        <ng-template ngbPaginationNumber let-page>{{ page }}</ng-template>
-      </ngb-pagination>
-      <div class="pagination-wrapper">
-        <div class="pagination-controls">
-          <div class="pagination-row-selection">
-            <label for="row-select">Rows per page:</label>
-            <select
-              id="row-select"
-              [ngModel]="pageSize"
-              (change)="onItemsPerPageChange($event)"
-            >
-              <option value="5">5</option>
-              <option value="10">10</option>
-              <option value="20">20</option>
-              <option value="50">50</option>
-              <option value="100">100</option>
-            </select>
-          </div>
+          <ng-template ngbPaginationFirst>First</ng-template>
+          <ng-template ngbPaginationLast>Last</ng-template>
+          <ng-template ngbPaginationPrevious
+            ><span class="p-2">Previous</span></ng-template
+          >
+          <ng-template ngbPaginationNext
+            ><span class="p-2">Next</span></ng-template
+          >
+          <ng-template ngbPaginationEllipsis>...</ng-template>
+          <ng-template ngbPaginationNumber let-page>{{ page }}</ng-template>
+        </ngb-pagination>
+      </div>
+    </div>
+    <div class="p-2 ml-auto pagination-wrapper">
+      <div class="pagination-controls">
+        <div class="pagination-row-selection">
+          <label for="row-select">Rows per page:</label>
+          <select
+            id="row-select"
+            [ngModel]="pageSize"
+            (change)="onItemsPerPageChange($event)"
+          >
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+          </select>
         </div>
       </div>
     </div>
