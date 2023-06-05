@@ -1,0 +1,11 @@
+.input-icon {
+  color: #b5b5b5;
+  font-size: 15px;
+  text-align: center;
+  width: 40px;
+  vertical-align: top;
+  display: inline-block;
+}
+::ng-deep #basic-addon1.input-group-text {
+  padding: 0px !important;
+}
